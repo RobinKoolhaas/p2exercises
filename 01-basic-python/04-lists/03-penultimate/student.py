@@ -1,1 +1,4 @@
-# Write your code here
+#!/usr/bin/python3
+
+def penultimate(xs: list):
+    return xs[-2]
