@@ -1,1 +1,4 @@
-# Write your code here
+#!/usr/bin/python3
+
+def drop_first(xs: list) -> list:
+    return xs[1:]
