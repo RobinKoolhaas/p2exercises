@@ -12,7 +12,16 @@ class Library:
         self.books.append(book)
 
     def remove_book(self, book):
-        pass
+        for book in self.books:
+            if book == book:
+                self.books.remove(book)
+                return
 
     def search_books(self, search_string):
-        pass
+        result = list()
+
+        for book in self.books:
+            if (search_string.lower() in book.title.lower() or search_string.lower() in book.author.lower()):
+                result.append(book)
+
+        return result
