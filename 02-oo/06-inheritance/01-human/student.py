@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 class Human:
     def __init__(self, name):
         self.__name = name
@@ -8,7 +10,8 @@ class Human:
 
 class Archer(Human):
     def __init__(self, name, num_arrows):
-        pass
+        super().__init__(name)
+        self.__num_arrows = num_arrows
 
     def get_num_arrows(self):
         return self.__num_arrows
