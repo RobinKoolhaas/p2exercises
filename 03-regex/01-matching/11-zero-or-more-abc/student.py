@@ -1,1 +1,7 @@
-# Write your code here
+#!/usr/bin/python3
+
+import re
+
+
+def zero_or_more_abc(string):
+    return re.fullmatch(r'(abc)*', string)

@@ -1,1 +1,6 @@
-# Write your code here
+#!/usr/bin/python3
+
+import re
+
+def equals_a(string):
+    return re.fullmatch("a", string)
