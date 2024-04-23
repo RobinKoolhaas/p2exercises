@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from math import pi
 
+
 class Shape(ABC):
     @property
     @abstractmethod
@@ -11,6 +12,7 @@ class Shape(ABC):
     @abstractmethod
     def area(self):
         pass
+
 
 class Rectangle(Shape):
     def __init__(self, length, width):
