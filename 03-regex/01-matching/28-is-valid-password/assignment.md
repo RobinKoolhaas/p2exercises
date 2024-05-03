@@ -1,4 +1,4 @@
-# Assignment
+@# Assignment
 
 Write a function `is_valid_password(string)` that checks if `string`
 satisfies the following conditions:
