@@ -13,6 +13,7 @@ class Shape(ABC):
     def perimeter(self):
         ...
 
+
 class Rectangle(Shape):
     def __init__(self, length, width):
         self.__length = length
@@ -34,6 +35,7 @@ class Rectangle(Shape):
     def perimeter(self):
         return 2 * (self.__width + self.__length)
 
+
 class Square(Rectangle):
     def __init__(self, side):
         super().__init__(side, side)
@@ -41,6 +43,7 @@ class Square(Rectangle):
     @property
     def side(self):
         return self.length
+
 
 class Ellipse(Shape):
     def __init__(self, major_radius, minor_radius):
@@ -63,6 +66,7 @@ class Ellipse(Shape):
     def minor_radius(self):
         return self.__minor_radius
 
+
 class Circle(Ellipse):
     def __init__(self, radius):
         super().__init__(radius, radius)
@@ -77,4 +81,4 @@ class Circle(Ellipse):
 
     @property
     def radius(self):
-        return self.major_radius    
+        return self.major_radius

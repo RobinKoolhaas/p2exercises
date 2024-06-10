@@ -80,7 +80,7 @@ This is the case with our square root example: we can easily check the result of
 @pytest.mark.parametrize('n', [
     n for n in range(1000)
 ])
-def test_sqrt(n, expected):
+def test_sqrt(nde):
     actual = sqrt(n)
     assert approx(actual * actual) == n
 ```

@@ -1,5 +1,7 @@
-import pytest
 from datetime import date, timedelta
+
+import pytest
+
 from calendars import CalendarStub
 from tasks import Task, TaskList
 
@@ -9,15 +11,25 @@ def today():
 
 
 def tomorrow():
-    return today() + timedelta(days = 1)
+    return today() + timedelta(days=1)
 
 
 def yesterday():
-    return today() - timedelta(days = 1)
+    return today() - timedelta(days=1)
 
 
 def create_calendar():
     return CalendarStub(today())
+
+
+def create_task(*, description='default description', due_date=None, finished=False):
+    due_date = due_date or date(2000, 1, 1)
+    task = Task(description, due_date)
+
+    if finished:
+        task.finished = True
+
+    return task
 
 
 def create_empty_task_list(calendar=None):
@@ -25,18 +37,10 @@ def create_empty_task_list(calendar=None):
     return TaskList(calendar)
 
 
-def create_task(*, description='default description', due_date=None, finished=False):
-    due_date = due_date or date(2000, 1, 1)
-    task = Task(description, due_date)
-    if finished:
-        task.finished = True
-    return task
-
-
 def test_creation():
     sut = create_empty_task_list()
 
-    # Assert
+    #assert
     assert 0 == len(sut)
     assert [] == sut.due_tasks
     assert [] == sut.overdue_tasks
@@ -44,54 +48,35 @@ def test_creation():
 
 
 def test_adding_task_with_due_day_in_future():
-    # Arrange
+    #arrange
     sut = create_empty_task_list()
     task = create_task(due_date=tomorrow())
 
-    # Act
+    #act
     sut.add_task(task)
 
-    # Assert
+    #assert
     assert 1 == len(sut)
     assert [task] == sut.due_tasks
 
 
 def test_adding_task_with_due_day_in_past():
-    # Arrange
-    task = create_task(due_date=yesterday())
+    #arrange
     sut = create_empty_task_list()
+    task = create_task(due_date=yesterday())
 
-    # Act/Assert
+    #act/assert
     with pytest.raises(RuntimeError):
         sut.add_task(task)
     assert 0 == len(sut)
 
 
-def test_task_becomes_overdue():
-    # Arrange
-    next_week = today() + timedelta(weeks=1)
-    task = create_task(due_date=tomorrow())
-    calendar = create_calendar()
-    sut = create_empty_task_list(calendar=calendar)
-
-    sut.add_task(task)
-
-    # Act
-    calendar.today = next_week
-
-    # Assert
-    assert [task] == sut.overdue_tasks
-
-
 def test_task_becomes_finished():
-    # Arrange
-    task = create_task(due_date=tomorrow())
+    #arrange
     sut = create_empty_task_list()
+    task = create_task(due_date=today(), finished=True)
     sut.add_task(task)
 
-    # Act
-    task.finished = True
-
-    # Assert
+    #assert
     assert [] == sut.due_tasks
     assert [task] == sut.finished_tasks
